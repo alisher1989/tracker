@@ -5,20 +5,23 @@ from webapp.models import Task
 from django.views.generic import TemplateView
 
 
-class IndexView(View):
-    def get(self, request, *args, **kwargs):
-        tasks = Task.objects.all()
-        return render(request, 'index.html', context={
-            'tasks': tasks
-        })
+class IndexView(TemplateView):
+    template_name = 'index.html'
 
-class TaskView(View):
-    def get(self, request, *args, **kwargs):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = Task.objects.all()
+        return context
+
+class TaskView(TemplateView):
+    template_name = 'task.html'
+
+
+    def get_context_data(self, **kwargs):
         pk = kwargs.get('pk')
-        task = get_object_or_404(Task, pk=pk)
-        return render(request, 'task.html', context={
-            'task': task
-        })
+        context = super().get_context_data(**kwargs)
+        context['task'] = get_object_or_404(Task, pk=pk)
+        return context
 
 class TaskCreateView(View):
     def get(self, request, *args, **kwargs):
