@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>create</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Create task{% endblock %}
+{% block content %}
+    <h1>Create Article</h1>
+    <form method="POST" action="{% url 'task_add' %}">
+        {% include 'partial/item_form.html' with button_text="Create" %}
+    </form>
+{% endblock %}

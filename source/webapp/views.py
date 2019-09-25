@@ -41,8 +41,8 @@ class TaskCreateView(View):
 
 
 class TaskUpdateView(View):
-    def get(self, request, *args, **kwargs):
-        task = get_object_or_404(Task)
+    def get(self, request, pk, *args, **kwargs):
+        task = get_object_or_404(Task, pk=pk)
         form = TaskForm(data={
             'summary': task.summary,
             'description': task.description,
@@ -53,8 +53,8 @@ class TaskUpdateView(View):
         return render(request, 'update.html', context={'form': form, 'task': task})
 
 
-    def post(self, request, *args, **kwargs):
-        task = get_object_or_404(Task)
+    def post(self, request, pk, *args, **kwargs):
+        task = get_object_or_404(Task, pk=pk)
         form = TaskForm(data=request.POST)
         if form.is_valid():
             task.summary = form.cleaned_data['summary']
@@ -69,12 +69,12 @@ class TaskUpdateView(View):
 
 
 class TaskDeleteView(View):
-    def get(self, request, *args, **kwargs):
-        task = get_object_or_404(Task)
+    def get(self, request, pk, *args, **kwargs):
+        task = get_object_or_404(Task, pk=pk)
         return render(request, 'delete.html', context={'task': task})
 
-    def post(self, request, *args, **kwargs):
-        task = get_object_or_404(Task)
+    def post(self, request, pk, *args, **kwargs):
+        task = get_object_or_404(Task, pk=pk)
         task.delete()
         return redirect('index')
 
