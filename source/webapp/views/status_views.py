@@ -9,7 +9,6 @@ from .base_views import ListView
 
 class StatusesView(ListView):
     template_name = 'status/statuses.html'
-
     model = Status
     context_key = 'statuses'
 

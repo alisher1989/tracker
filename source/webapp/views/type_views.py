@@ -8,7 +8,6 @@ from .base_views import ListView
 
 class TypesView(ListView):
     template_name = 'type/types.html'
-
     model = Type
     context_key = 'types'
 
