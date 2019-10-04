@@ -3,15 +3,18 @@ from webapp.forms import TaskForm
 from django.views import View
 from webapp.models import Task
 from django.views.generic import TemplateView
+from .base_views import ListView
 
 
-class IndexView(TemplateView):
+class IndexView(ListView):
     template_name = 'task/index.html'
+    model = Task
+    context_key = 'tasks'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tasks'] = Task.objects.all()
-        return context
+    def get_objects(self):
+        return Task.objects.order_by('-created_at')
+
+
 
 
 class TaskView(TemplateView):

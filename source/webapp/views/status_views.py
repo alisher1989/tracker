@@ -3,16 +3,15 @@ from webapp.forms import StatusForm
 from django.views import View
 from webapp.models import Status
 from django.views.generic import TemplateView
+from .base_views import ListView
 
 
 
-class StatusesView(TemplateView):
+class StatusesView(ListView):
     template_name = 'status/statuses.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['statuses'] = Status.objects.all()
-        return context
+    model = Status
+    context_key = 'statuses'
 
 
 class StatusCreateView(View):
