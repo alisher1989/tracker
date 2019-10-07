@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+
 from webapp.forms import StatusForm
 from django.views import View
 from webapp.models import Status
 from django.views.generic import TemplateView
-from .base_views import ListView
+from .base_views import ListView, CreateView
 
 
 
@@ -13,7 +15,14 @@ class StatusesView(ListView):
     context_key = 'statuses'
 
 
-class StatusCreateView(View):
+class StatusCreateView(CreateView):
+    model = Status
+    template_name = 'status/create_status.html'
+    form_class = StatusForm
+
+    def get_redirect_url(self):
+        return reverse('statuses_view')
+
     def get(self, request, *args, **kwargs):
         form = StatusForm()
         return render(request, 'status/create_status.html', context={'form': form})
