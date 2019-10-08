@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+
 from webapp.forms import TypeForm
 from django.views import View
 from webapp.models import Type
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
 from .base_views import ListView
 
 
@@ -13,27 +15,20 @@ class TypesView(ListView):
 
 
 
-class TypeCreateView(View):
-    def get(self, request, *args, **kwargs):
-        form = TypeForm()
-        return render(request, 'type/create_type.html', context={'form': form})
+class TypeCreateView(CreateView):
+    model = Type
+    template_name = 'type/create_type.html'
+    form_class = TypeForm
 
-    def post(self, request, *args, **kwargs):
-        form = TypeForm(data=request.POST)
-        if form.is_valid():
-            Type.objects.create(
-                type=form.cleaned_data['new_type'],
-            )
-            return redirect('types_view')
-        else:
-            return render(request, 'type/create_type.html', context={'form': form})
+    def get_success_url(self):
+        return reverse('statuses_view')
 
 
 class TypeUpdateView(View):
     def get(self, request, pk, *args, **kwargs):
         type = get_object_or_404(Type, pk=pk)
         form = TypeForm(data={
-            'new_type': type.type
+            'type': type.type
         })
         return render(request, 'type/type_update.html', context={'form': form, 'type': type})
 
@@ -42,7 +37,7 @@ class TypeUpdateView(View):
         type = get_object_or_404(Type, pk=pk)
         form = TypeForm(data=request.POST)
         if form.is_valid():
-            type.type = form.cleaned_data['new_type']
+            type.type = form.cleaned_data['type']
             type.save()
             return redirect('types_view')
         else:

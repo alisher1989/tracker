@@ -4,8 +4,8 @@ from django.urls import reverse
 from webapp.forms import StatusForm
 from django.views import View
 from webapp.models import Status
-from django.views.generic import TemplateView
-from .base_views import ListView, CreateView
+from django.views.generic import CreateView, DetailView
+from .base_views import ListView
 
 
 
@@ -20,22 +20,9 @@ class StatusCreateView(CreateView):
     template_name = 'status/create_status.html'
     form_class = StatusForm
 
-    def get_redirect_url(self):
+    def get_success_url(self):
         return reverse('statuses_view')
 
-    def get(self, request, *args, **kwargs):
-        form = StatusForm()
-        return render(request, 'status/create_status.html', context={'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = StatusForm(data=request.POST)
-        if form.is_valid():
-            Status.objects.create(
-                status=form.cleaned_data['new_status'],
-            )
-            return redirect('statuses_view')
-        else:
-            return render(request, 'status/create_status.html', context={'form': form})
 
 class StatusUpdateView(View):
     def get(self, request, pk, *args, **kwargs):

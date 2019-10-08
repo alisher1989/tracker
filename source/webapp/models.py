@@ -21,5 +21,6 @@ class Type(models.Model):
 class Status(models.Model):
     status = models.CharField(max_length=50, verbose_name='status')
 
+
     def __str__(self):
         return self.status
