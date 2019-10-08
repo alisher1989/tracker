@@ -1,8 +1,6 @@
-from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
 from webapp.forms import TaskForm
-from django.views import View
 from webapp.models import Task
 from django.views.generic import ListView, DetailView , CreateView
 from .base_views import UpdateView, DeleteView
