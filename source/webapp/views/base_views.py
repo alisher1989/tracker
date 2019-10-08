@@ -23,38 +23,6 @@ class DetailView(TemplateView):
         return context
 
 
-class CreateView(View):
-    form_class = None
-    template_name = None
-    redirect_url = ''
-    model = None
-
-
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, context={'form': form})
-
-
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(data=request.POST)
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-
-
-    def get_redirect_url(self):
-        return self.redirect_url
-
-
-    def form_valid(self, form):
-        self.object = self.model.objects.create(**form.cleaned_data)
-        return redirect(self.get_redirect_url())
-
-    def form_invalid(self, form):
-        return render(self.request, self.template_name, context={'form': form})
-
 class UpdateView(View):
     form_class = None
     template_name = None
@@ -102,7 +70,6 @@ class DeleteView(View):
     context_object_name = None
     object = None
     error_page = None
-
 
     def get(self, request, *args, **kwargs):
         object = self.get_object()

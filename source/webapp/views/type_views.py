@@ -1,10 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect
+
 from django.urls import reverse
 
 from webapp.forms import TypeForm
-from django.views import View
+
 from webapp.models import Type
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import CreateView
 from .base_views import ListView, UpdateView, DeleteView
 
 
