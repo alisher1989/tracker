@@ -48,7 +48,7 @@ class TaskDeleteView(DeleteView):
     context_object_name = 'task'
 
     def get_redirect_url(self):
-        return reverse('task_view', kwargs={'pk': self.object.pk})
+        return reverse('index')
 
 
 
