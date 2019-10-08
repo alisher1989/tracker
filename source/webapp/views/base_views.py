@@ -101,20 +101,26 @@ class DeleteView(View):
     pk_kwargs_url = 'pk'
     context_object_name = None
     object = None
+    error_page = None
 
 
-    def get(self, request, pk, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         object = self.get_object()
-        return render(request, 'task/delete.html', context={self.context_object_name: object})
+        return render(request, self.template_name, context={self.context_object_name: object})
 
-    def post(self, request, pk, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        self.object.delete()
-        return redirect('index')
+        try:
+            self.object.delete()
+            return redirect(self.get_redirect_url())
+        except:
+            return render(request, self.error_page)
 
     def get_object(self):
         pk = self.kwargs.get(self.pk_kwargs_url)
         obj = get_object_or_404(self.model, pk=pk)
         return obj
 
+    def get_redirect_url(self):
+        return self.redirect_url
 

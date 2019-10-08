@@ -5,8 +5,7 @@ from webapp.forms import StatusForm
 from django.views import View
 from webapp.models import Status
 from django.views.generic import CreateView, DetailView
-from .base_views import ListView
-
+from .base_views import ListView, UpdateView, DeleteView
 
 
 class StatusesView(ListView):
@@ -24,35 +23,37 @@ class StatusCreateView(CreateView):
         return reverse('statuses_view')
 
 
-class StatusUpdateView(View):
-    def get(self, request, pk, *args, **kwargs):
-        status = get_object_or_404(Status, pk=pk)
-        form = StatusForm(data={
-            'new_status': status.status
-        })
-        return render(request, 'status/status_update.html', context={'form': form, 'status': status})
+
+class StatusUpdateView(UpdateView):
+    model = Status
+    template_name = 'status/status_update.html'
+    form_class = StatusForm
+    context_object_name = 'status'
+
+    def get_redirect_url(self):
+        return reverse('statuses_view')
 
 
-    def post(self, request, pk, *args, **kwargs):
-        status = get_object_or_404(Status, pk=pk)
-        form = StatusForm(data=request.POST)
-        if form.is_valid():
-            status.status = form.cleaned_data['new_status']
-            status.save()
-            return redirect('statuses_view')
-        else:
-            return render(request, 'status/status_update.html', context={'form': form, 'status': status})
 
 
-class StatusDeleteView(View):
-    def get(self, request, pk, *args, **kwargs):
-        status = get_object_or_404(Status, pk=pk)
-        return render(request, 'status/status_delete.html', context={'status': status})
+class StatusDeleteView(DeleteView):
+    model = Status
+    template_name = 'status/status_delete.html'
+    context_object_name = 'status'
+    error_page = 'error.html'
 
-    def post(self, request, pk, *args, **kwargs):
-        status = get_object_or_404(Status, pk=pk)
-        try:
-            status.delete()
-            return redirect('statuses_view')
-        except:
-            return render(request, 'error.html')
+    def get_redirect_url(self):
+        return reverse('statuses_view')
+
+# class StatusDeleteView(View):
+#     def get(self, request, pk, *args, **kwargs):
+#         status = get_object_or_404(Status, pk=pk)
+#         return render(request, 'status/status_delete.html', context={'status': status})
+#
+#     def post(self, request, pk, *args, **kwargs):
+#         status = get_object_or_404(Status, pk=pk)
+#         try:
+#             status.delete()
+#             return redirect('statuses_view')
+#         except:
+#             return render(request, 'error.html')
