@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 
 from webapp.forms import ProjectForm
@@ -12,6 +13,9 @@ class ProjectsView(ListView):
     ordering = ['-created_at']
     paginate_by = 4
     paginate_orphans = 1
+
+    def get_queryset(self):
+        return Project.objects.all().filter(project_status='active')
 
 
 class ProjectView(DetailView):
@@ -45,3 +49,15 @@ class ProjectDeleteView(DeleteView):
     template_name = 'project/delete.html'
     context_object_name = 'project'
     success_url = reverse_lazy('projects_view')
+    pk_kwargs_url = 'pk'
+
+    # def get_object(self):
+    #     pk = self.kwargs.get(self.pk_kwargs_url)
+    #     obj = get_object_or_404(self.model, pk=pk)
+    #     a = Project.objects.obj(project_status='blocked')
+    #     b = a
+    #     if self.delete(obj):
+    #         obj = Project.objects.obj(project_status='blocked')
+
+
+
