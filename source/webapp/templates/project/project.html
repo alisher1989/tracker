@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Project{% endblock %}
+{% block content %}
+    <h1>{{ project.name }}</h1>
+        <p><b>Description: </b>{{ project.description }}</p>
+        <p><b>Created at: </b>{{ project.created_at }}</p>
+        <p><b>Updated at:</b>{{ project.updated_at }}</p>
+        <p>
+            <a href="{% url 'projects_view' %}" class="btn btn-default">Projects</a>
+        </p>
 
-</body>
-</html>
+{% endblock %}
