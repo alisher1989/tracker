@@ -4,7 +4,7 @@ from django.urls import reverse
 from webapp.forms import StatusForm
 
 from webapp.models import Status
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView
 from .base_views import ListView, UpdateView, DeleteView
 
 
