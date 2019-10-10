@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 {% block title %}Delete task{% endblock %}
+{% block menu %}
+    <li><a href="{% url 'task_update' task.pk %}">Edit</a></li>
+    <li><a href="{% url 'task_delete' task.pk %}">Delete</a></li>
+    <li><a href="{% url 'task_add' %}">Add Task</a></li>
+    <li><a href="{% url 'projects_view' %}">Projects</a></li>
+    <li><a href="{% url 'statuses_view' %}">Statuses</a></li>
+    <li><a href="{% url 'types_view' %}">Types</a></li>
+{% endblock %}
 {% block content %}
     <h1>{{ task.summary }}</h1>
         <p><b>Description: </b>{{ task.description }}</p>

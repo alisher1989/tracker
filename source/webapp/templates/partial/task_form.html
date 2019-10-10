@@ -30,4 +30,10 @@
     <p class="form-error">{{ errors }}</p>
 {% endfor %}
 
+<p><label for="{{ form.project.id_for_label }}">Project *</label></p>
+<p>{{ form.project|add_class:"form-control" }}</p>
+{% for error in form.project.errors %}
+    <p class="form-error">{{ errors }}</p>
+{% endfor %}
+
 <p class="text-center"><input type="submit" value="Confirm" class="btn btn-primary"></p>

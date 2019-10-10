@@ -1,24 +1,90 @@
 [
 {
-  "model": "webapp.task",
-  "pk": 1,
+  "model": "webapp.project",
+  "pk": 2,
   "fields": {
-    "summary": "Football",
-    "description": "Monday , 30 October, 2019 Manchester United will play with Arsenal.\r\nBig hope that Arsenal will win this incredible game",
-    "status": 1,
-    "type": 1,
-    "created_at": "2019-09-25T07:23:52.249Z"
+    "name": "Project 1",
+    "description": "Project 1",
+    "created_at": "2019-10-09T08:21:51.065Z",
+    "updated_at": "2019-10-10T07:43:01.378Z",
+    "project_status": "blocked"
   }
 },
 {
-  "model": "webapp.task",
-  "pk": 2,
+  "model": "webapp.project",
+  "pk": 3,
   "fields": {
-    "summary": "Django Lessons",
-    "description": "Have to learn all Django subjects , and practice it in homeworks , \r\nso that it would be easy when I get job",
-    "status": 2,
-    "type": 1,
-    "created_at": "2019-09-25T07:26:44.999Z"
+    "name": "Project 2",
+    "description": "Project 2",
+    "created_at": "2019-10-09T08:22:08.386Z",
+    "updated_at": "2019-10-09T08:22:08.387Z",
+    "project_status": "active"
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 4,
+  "fields": {
+    "name": "Project 3",
+    "description": "Project 3",
+    "created_at": "2019-10-09T08:22:24.560Z",
+    "updated_at": "2019-10-09T08:22:24.560Z",
+    "project_status": "blocked"
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 5,
+  "fields": {
+    "name": "Project 4",
+    "description": "Project 4",
+    "created_at": "2019-10-09T08:22:42.193Z",
+    "updated_at": "2019-10-09T08:22:42.193Z",
+    "project_status": "blocked"
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 6,
+  "fields": {
+    "name": "Project 5",
+    "description": "Project 5",
+    "created_at": "2019-10-09T08:27:35.178Z",
+    "updated_at": "2019-10-09T08:27:35.179Z",
+    "project_status": "active"
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 7,
+  "fields": {
+    "name": "Project 6",
+    "description": "Project 6",
+    "created_at": "2019-10-09T08:27:49.374Z",
+    "updated_at": "2019-10-09T08:27:49.375Z",
+    "project_status": "blocked"
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 8,
+  "fields": {
+    "name": "Project 7",
+    "description": "Project 7",
+    "created_at": "2019-10-09T08:28:02.891Z",
+    "updated_at": "2019-10-09T08:28:02.891Z",
+    "project_status": "active"
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 9,
+  "fields": {
+    "name": "Project 8",
+    "description": "Project 8",
+    "created_at": "2019-10-09T08:28:16.286Z",
+    "updated_at": "2019-10-10T08:00:09.945Z",
+    "project_status": "active"
   }
 },
 {
@@ -29,6 +95,7 @@
     "description": "I gotta take photo for my family , to fill green card lotery fields",
     "status": 2,
     "type": 3,
+    "project": 9,
     "created_at": "2019-09-25T07:27:52.589Z"
   }
 },
@@ -40,18 +107,104 @@
     "description": "I have to finish it before winter, becouse\r\nWINTER IS HERE",
     "status": 2,
     "type": 3,
+    "project": 8,
     "created_at": "2019-09-25T07:28:53.816Z"
   }
 },
 {
   "model": "webapp.task",
-  "pk": 5,
+  "pk": 7,
   "fields": {
-    "summary": "Buying F.C. Arsenal",
-    "description": "Wanna buy such a great club like Arsenal",
-    "status": 1,
+    "summary": "Basketball",
+    "description": "Playing Basketball",
+    "status": 3,
     "type": 2,
-    "created_at": "2019-09-25T07:29:50.017Z"
+    "project": 7,
+    "created_at": "2019-09-26T09:47:24.838Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 9,
+  "fields": {
+    "summary": "aaaaaa",
+    "description": "aaaaaa",
+    "status": 3,
+    "type": 2,
+    "project": 6,
+    "created_at": "2019-10-04T09:06:56.389Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 10,
+  "fields": {
+    "summary": "bbbbbb",
+    "description": "bbbbbbbbbbbb",
+    "status": 2,
+    "type": 1,
+    "project": 5,
+    "created_at": "2019-10-04T09:07:20.800Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 11,
+  "fields": {
+    "summary": "ccccc",
+    "description": "cccc",
+    "status": 2,
+    "type": 1,
+    "project": 4,
+    "created_at": "2019-10-04T09:41:45.340Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 13,
+  "fields": {
+    "summary": "Zadacha",
+    "description": "novoe opisanie",
+    "status": 2,
+    "type": 6,
+    "project": 3,
+    "created_at": "2019-10-07T14:22:50.447Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 14,
+  "fields": {
+    "summary": "Specialist",
+    "description": "Developer, and Developier",
+    "status": 5,
+    "type": 1,
+    "project": 2,
+    "created_at": "2019-10-07T14:48:58.738Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 26,
+  "fields": {
+    "summary": "Lenovo",
+    "description": "Hrenovo",
+    "status": 5,
+    "type": 1,
+    "project": 3,
+    "created_at": "2019-10-10T08:34:53.210Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 27,
+  "fields": {
+    "summary": "hhhhhhhhhhhhh",
+    "description": "kkkkkkkkkkk",
+    "status": 3,
+    "type": 3,
+    "project": 3,
+    "created_at": "2019-10-10T08:36:41.469Z"
   }
 },
 {
@@ -76,10 +229,10 @@
   }
 },
 {
-  "model": "webapp.status",
-  "pk": 1,
+  "model": "webapp.type",
+  "pk": 6,
   "fields": {
-    "status": "new"
+    "type": "game"
   }
 },
 {
@@ -97,11 +250,25 @@
   }
 },
 {
+  "model": "webapp.status",
+  "pk": 5,
+  "fields": {
+    "status": "IT"
+  }
+},
+{
+  "model": "webapp.status",
+  "pk": 11,
+  "fields": {
+    "status": "multiki"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$150000$NvZ1MmlTIXf3$xHMM4W5XHSMAPAsrURClHzTR1PxB/31DmhQfwt+9+Ak=",
-    "last_login": "2019-09-25T06:22:17.407Z",
+    "last_login": "2019-10-09T06:53:45.616Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",

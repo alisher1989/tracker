@@ -1,9 +1,11 @@
-from django.shortcuts import get_object_or_404
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
+from django.views import View
 
 from webapp.forms import ProjectForm
 from webapp.models import Project
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+
 
 
 class ProjectsView(ListView):
@@ -43,21 +45,27 @@ class ProjectUpdateView(UpdateView):
         return reverse('project_view', kwargs={'pk': self.object.pk})
 
 
-
-class ProjectDeleteView(DeleteView):
+class ProjectDeleteView(View):
+    redirect_url = 'projects_view'
     model = Project
-    template_name = 'project/delete.html'
-    context_object_name = 'project'
-    success_url = reverse_lazy('projects_view')
     pk_kwargs_url = 'pk'
 
-    # def get_object(self):
-    #     pk = self.kwargs.get(self.pk_kwargs_url)
-    #     obj = get_object_or_404(self.model, pk=pk)
-    #     a = Project.objects.obj(project_status='blocked')
-    #     b = a
-    #     if self.delete(obj):
-    #         obj = Project.objects.obj(project_status='blocked')
+    def get(self, request, *args, **kwargs):
+        project = self.get_object()
+        return render(request, 'project/delete.html', context={'project': project})
 
+    def post(self, request, *args, **kwargs):
+        self.project = self.get_object()
+        self.project.project_status = 'blocked'
+        self.project.save()
+        return redirect(self.get_redirect_url())
+
+    def get_object(self):
+        pk = self.kwargs.get(self.pk_kwargs_url)
+        project = get_object_or_404(self.model, pk=pk)
+        return project
+
+    def get_redirect_url(self):
+        return self.redirect_url
 
 

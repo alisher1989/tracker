@@ -20,10 +20,15 @@
     {% endif %}
     <div class="task-list">
         {% for task in project.projects_task.all %}
+            <hr>
             <div class="task">
                 <p>{{ task.summary }} created at {{ task.created_at|date:'d.m.Y H:i:s' }}</p>
                 <div class="pre">{{ task.description }}</div>
+                <a href="{% url 'task_update' task.pk %}"><i class="fas fa-edit"></i></a>
+                <a href="{% url 'task_delete' task.pk %}"><i class="fas fa-trash"></i></a>
+                <a href="{% url 'task_add' %}"><i class="fas fa-plus-square"></i></a>
             </div>
+            <hr>
         {% empty %}
             <p>No tasks yet.</p>
         {% endfor %}

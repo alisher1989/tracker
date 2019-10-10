@@ -20,7 +20,7 @@ class Task(models.Model):
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='descripton')
     status = models.ForeignKey('webapp.Status', related_name='task_status', on_delete=models.PROTECT, null=True, blank=True, verbose_name='status')
     type = models.ForeignKey('webapp.Type', related_name='task_type', on_delete=models.PROTECT, null=True, blank=True, verbose_name='type')
-    project = models.ForeignKey('webapp.Project', related_name='projects_task', on_delete=models.CASCADE, null=True, blank=False, verbose_name='project')
+    project = models.ForeignKey('webapp.Project', related_name='projects_task', on_delete=models.PROTECT, null=True, blank=False, verbose_name='project')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='created_at')
 
     def __str__(self):
