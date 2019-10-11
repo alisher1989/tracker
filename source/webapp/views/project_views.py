@@ -1,3 +1,5 @@
+
+
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views import View
@@ -18,7 +20,6 @@ class ProjectsView(ListView):
 
     def get_queryset(self):
         return Project.objects.all().filter(project_status='active')
-
 
 class ProjectView(DetailView):
     template_name = 'project/project.html'
