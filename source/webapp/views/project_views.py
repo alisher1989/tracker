@@ -1,10 +1,10 @@
-
-
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from django.utils.http import urlencode
 from django.views import View
 
-from webapp.forms import ProjectForm
+from webapp.forms import ProjectForm, SimpleSearchForm
 from webapp.models import Project
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
@@ -18,8 +18,33 @@ class ProjectsView(ListView):
     paginate_by = 4
     paginate_orphans = 1
 
+    def get(self, request, *args, **kwargs):
+        self.form = self.get_search_form()
+        self.search_value = self.get_search_value()
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['form'] = self.form
+        if self.search_value:
+            context['query'] = urlencode({'search': self.search_value})
+        return context
+
     def get_queryset(self):
-        return Project.objects.all().filter(project_status='active')
+        queryset = super().get_queryset()
+        if self.search_value:
+            query = Q(title__icontains=self.search_value) | Q(author__icontains=self.search_value)
+            queryset = queryset.filter(query)
+        return queryset
+
+    def get_search_form(self):
+        return SimpleSearchForm(self.request.GET)
+
+    def get_search_value(self):
+        if self.form.is_valid():
+            return self.form.cleaned_data['search']
+        return None
+
 
 class ProjectView(DetailView):
     template_name = 'project/project.html'
