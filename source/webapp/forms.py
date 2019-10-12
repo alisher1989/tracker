@@ -24,3 +24,7 @@ class TypeForm(forms.ModelForm):
     class Meta:
         model = Type
         fields = ['type']
+
+
+class SimpleSearchForm(forms.Form):
+    search = forms.CharField(max_length=100, required=False, label='Search')
