@@ -5,6 +5,8 @@
 {% endblock %}
 {% block content %}
     <h1 class="mt-3">Projects</h1>
+    {% include 'partial/simple_search.html' %}
+    <hr>
         {% if is_paginated  %}
         {% include 'partial/pagination.html' %}
     {% endif %}
