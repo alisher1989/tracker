@@ -1,0 +1,24 @@
+1)
+>>> import datetime
+>>> today = datetime.date.today()
+>>> today
+>>> delta = datetime.timedelta(days=30)
+>>> delta
+>>> datetime.timedelta(30)
+>>> Task.objects.filter(status__status='done', updated_at__gt=today - delta)
+
+
+2)
+>>> project = Project.objects.get(name='Playing')
+>>> projects_tasks = project.projects_task.all()
+>>> projects_tasks.values('type__type')
+>>> <QuerySet [{'type__type': 'game'}, {'type__type': 'bug'}, {'type__type': 'enhancement'}]>
+
+
+3)
+>>> Project.objects.filter(projects_task__description__icontains='i')
+>>> <QuerySet [<Project: Alisher>]>
+
+
+4)bonus
+>>> Project.objects.filter(projects_task__status__status='done')
