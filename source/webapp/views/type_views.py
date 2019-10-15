@@ -1,4 +1,4 @@
-
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 
 from webapp.forms import TypeForm
@@ -57,5 +57,18 @@ class TypeDeleteView(DeleteView):
     model = Type
     template_name = 'type/type_delete.html'
     context_object_name = 'type'
-    success_url = reverse_lazy('types_view')
+    pk_kwargs_url = 'pk'
+
+    def get_object(self, *args, **kwargs):
+        pk = self.kwargs.get(self.pk_kwargs_url)
+        obj = get_object_or_404(self.model, pk=pk)
+        return obj
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        try:
+            self.object.delete()
+            return redirect('statuses_view')
+        except:
+            return render(request, 'error_type.html')
 

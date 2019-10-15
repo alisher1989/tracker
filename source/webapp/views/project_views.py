@@ -1,12 +1,12 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.http import urlencode
 from django.views import View
 
 from webapp.forms import ProjectForm, SimpleSearchForm
 from webapp.models import Project
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
 
@@ -71,27 +71,29 @@ class ProjectUpdateView(UpdateView):
         return reverse('project_view', kwargs={'pk': self.object.pk})
 
 
-class ProjectDeleteView(View):
-    redirect_url = 'projects_view'
+class ProjectDeleteView(DeleteView):
     model = Project
     pk_kwargs_url = 'pk'
+    template_name = 'project/delete.html'
+    context_object_name = 'project'
+    success_url = reverse_lazy('projects_view')
 
-    def get(self, request, *args, **kwargs):
-        project = self.get_object()
-        return render(request, 'project/delete.html', context={'project': project})
-
-    def post(self, request, *args, **kwargs):
-        self.project = self.get_object()
-        self.project.project_status = 'blocked'
-        self.project.save()
-        return redirect(self.get_redirect_url())
-
-    def get_object(self):
-        pk = self.kwargs.get(self.pk_kwargs_url)
-        project = get_object_or_404(self.model, pk=pk)
-        return project
-
-    def get_redirect_url(self):
-        return self.redirect_url
+    # def get(self, request, *args, **kwargs):
+    #     project = self.get_object()
+    #     return render(request, 'project/delete.html', context={'project': project})
+    #
+    # def post(self, request, *args, **kwargs):
+    #     self.project = self.get_object()
+    #     self.project.project_status = 'blocked'
+    #     self.project.save()
+    #     return redirect(self.get_redirect_url())
+    #
+    # def get_object(self):
+    #     pk = self.kwargs.get(self.pk_kwargs_url)
+    #     project = get_object_or_404(self.model, pk=pk)
+    #     return project
+    #
+    # def get_redirect_url(self):
+    #     return self.redirect_url
 
 

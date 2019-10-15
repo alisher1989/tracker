@@ -4,6 +4,7 @@ PROJECT_STATUS = (
     ('blocked', 'blocked'),
 )
 
+
 class Project(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False, verbose_name='Название проекта')
     description = models.CharField(max_length=500, null=True, blank=True, verbose_name='Описание')
@@ -22,6 +23,7 @@ class Task(models.Model):
     type = models.ForeignKey('webapp.Type', related_name='task_type', on_delete=models.PROTECT, null=True, blank=True, verbose_name='тип')
     project = models.ForeignKey('webapp.Project', related_name='projects_task', on_delete=models.PROTECT, null=True, blank=False, verbose_name='проект')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='создано')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
 
     def __str__(self):
         return self.summary
