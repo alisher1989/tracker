@@ -160,7 +160,7 @@
     "name": "Planing",
     "description": "Planing the future",
     "created_at": "2019-10-12T14:15:24.718Z",
-    "updated_at": "2019-10-12T14:15:24.718Z",
+    "updated_at": "2019-10-14T11:38:30.565Z",
     "project_status": "blocked"
   }
 },
@@ -173,7 +173,8 @@
     "status": 2,
     "type": 3,
     "project": 9,
-    "created_at": "2019-09-25T07:27:52.589Z"
+    "created_at": "2019-09-25T07:27:52.589Z",
+    "updated_at": "2019-10-14T17:31:30.231Z"
   }
 },
 {
@@ -185,7 +186,8 @@
     "status": 2,
     "type": 3,
     "project": 8,
-    "created_at": "2019-09-25T07:28:53.816Z"
+    "created_at": "2019-09-25T07:28:53.816Z",
+    "updated_at": "2019-10-14T17:31:30.231Z"
   }
 },
 {
@@ -197,7 +199,8 @@
     "status": 3,
     "type": 2,
     "project": 7,
-    "created_at": "2019-09-26T09:47:24.838Z"
+    "created_at": "2019-09-26T09:47:24.838Z",
+    "updated_at": "2019-10-14T17:31:30.231Z"
   }
 },
 {
@@ -209,7 +212,8 @@
     "status": 3,
     "type": 2,
     "project": 6,
-    "created_at": "2019-10-04T09:06:56.389Z"
+    "created_at": "2019-10-04T09:06:56.389Z",
+    "updated_at": "2019-10-14T17:31:30.231Z"
   }
 },
 {
@@ -221,7 +225,8 @@
     "status": 2,
     "type": 1,
     "project": 5,
-    "created_at": "2019-10-04T09:07:20.800Z"
+    "created_at": "2019-10-04T09:07:20.800Z",
+    "updated_at": "2019-10-14T17:31:30.231Z"
   }
 },
 {
@@ -233,7 +238,8 @@
     "status": 2,
     "type": 1,
     "project": 4,
-    "created_at": "2019-10-04T09:41:45.340Z"
+    "created_at": "2019-10-04T09:41:45.340Z",
+    "updated_at": "2019-10-14T17:31:30.231Z"
   }
 },
 {
@@ -245,7 +251,8 @@
     "status": 2,
     "type": 6,
     "project": 3,
-    "created_at": "2019-10-07T14:22:50.447Z"
+    "created_at": "2019-10-07T14:22:50.447Z",
+    "updated_at": "2019-10-14T17:31:30.231Z"
   }
 },
 {
@@ -257,7 +264,8 @@
     "status": 5,
     "type": 1,
     "project": 2,
-    "created_at": "2019-10-07T14:48:58.738Z"
+    "created_at": "2019-10-07T14:48:58.738Z",
+    "updated_at": "2019-10-14T17:31:30.231Z"
   }
 },
 {
@@ -269,7 +277,8 @@
     "status": 5,
     "type": 1,
     "project": 3,
-    "created_at": "2019-10-10T08:34:53.210Z"
+    "created_at": "2019-10-10T08:34:53.210Z",
+    "updated_at": "2019-10-14T17:31:30.231Z"
   }
 },
 {
@@ -281,7 +290,8 @@
     "status": 3,
     "type": 1,
     "project": 2,
-    "created_at": "2019-10-12T14:08:26.178Z"
+    "created_at": "2019-10-12T14:08:26.178Z",
+    "updated_at": "2019-10-14T17:31:30.231Z"
   }
 },
 {
@@ -293,7 +303,8 @@
     "status": 3,
     "type": 3,
     "project": 21,
-    "created_at": "2019-10-12T14:09:10.360Z"
+    "created_at": "2019-10-12T14:09:10.360Z",
+    "updated_at": "2019-10-14T17:31:30.231Z"
   }
 },
 {
@@ -305,19 +316,8 @@
     "status": 5,
     "type": 1,
     "project": 8,
-    "created_at": "2019-10-12T14:09:54.984Z"
-  }
-},
-{
-  "model": "webapp.task",
-  "pk": 31,
-  "fields": {
-    "summary": "Walking",
-    "description": "Pogulyat' s sem'ei",
-    "status": 3,
-    "type": 6,
-    "project": 4,
-    "created_at": "2019-10-12T14:10:36.580Z"
+    "created_at": "2019-10-12T14:09:54.984Z",
+    "updated_at": "2019-10-14T17:31:30.231Z"
   }
 },
 {
@@ -329,7 +329,47 @@
     "status": 11,
     "type": 3,
     "project": 7,
-    "created_at": "2019-10-12T14:11:35.289Z"
+    "created_at": "2019-10-12T14:11:35.289Z",
+    "updated_at": "2019-10-14T17:31:30.231Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 34,
+  "fields": {
+    "summary": "Play",
+    "description": "PlayStation",
+    "status": 3,
+    "type": 6,
+    "project": 25,
+    "created_at": "2019-10-14T11:52:00.162Z",
+    "updated_at": "2019-10-14T17:31:30.231Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 36,
+  "fields": {
+    "summary": "ee",
+    "description": "eee",
+    "status": 3,
+    "type": 2,
+    "project": 25,
+    "created_at": "2019-10-15T08:33:44.962Z",
+    "updated_at": "2019-10-15T08:33:44.962Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 37,
+  "fields": {
+    "summary": "Taking photo",
+    "description": "eeeeeeeeeeeee",
+    "status": 3,
+    "type": 3,
+    "project": 25,
+    "created_at": "2019-10-15T08:34:21.320Z",
+    "updated_at": "2019-10-15T08:34:21.320Z"
   }
 },
 {
@@ -364,7 +404,7 @@
   "model": "webapp.status",
   "pk": 2,
   "fields": {
-    "status": "in_process"
+    "status": "in process"
   }
 },
 {
