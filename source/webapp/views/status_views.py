@@ -25,7 +25,7 @@ class StatusCreateView(CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('statuses_view')
+        return reverse('webapp:statuses_view')
 
 
 class StatusUpdateView(LoginRequiredMixin, UpdateView):
@@ -35,7 +35,7 @@ class StatusUpdateView(LoginRequiredMixin, UpdateView):
     context_object_name = 'status'
 
     def get_success_url(self):
-        return reverse('statuses_view')
+        return reverse('webapp:statuses_view')
 
 
 class StatusDeleteView(LoginRequiredMixin, DeleteView):
@@ -53,18 +53,8 @@ class StatusDeleteView(LoginRequiredMixin, DeleteView):
         self.object = self.get_object()
         try:
             self.object.delete()
-            return redirect('statuses_view')
+            return redirect('webapp:statuses_view')
         except:
             return render(request, 'error.html')
 
 
-
-
-
-    # def post(self, request, *args, **kwargs):
-    #     type = get_object_or_404(Type, pk=kwargs['pk'])
-    #     try:
-    #         type.delete()
-    #         return redirect('types_view')
-    #     except:
-    #         return render(request, 'error_type.html')

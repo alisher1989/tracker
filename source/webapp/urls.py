@@ -25,4 +25,4 @@ urlpatterns = [
 ]
 
 
-# app_name = 'webapp'
+app_name = 'webapp'

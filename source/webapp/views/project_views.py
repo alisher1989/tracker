@@ -65,7 +65,7 @@ class ProjectCreateView(CreateView):
 
 
     def get_success_url(self):
-        return reverse('project_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:project_view', kwargs={'pk': self.object.pk})
 
 
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):
@@ -75,7 +75,7 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     context_object_name = 'project'
 
     def get_success_url(self):
-        return reverse('project_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:project_view', kwargs={'pk': self.object.pk})
 
 
 class ProjectDeleteView(LoginRequiredMixin, DeleteView):
@@ -83,7 +83,7 @@ class ProjectDeleteView(LoginRequiredMixin, DeleteView):
     pk_kwargs_url = 'pk'
     template_name = 'project/delete.html'
     context_object_name = 'project'
-    success_url = reverse_lazy('projects_view')
+    success_url = reverse_lazy('webapp:projects_view')
 
 
     # def dispatch(self, request, *args, **kwargs):

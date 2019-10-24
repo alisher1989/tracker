@@ -26,7 +26,7 @@ class TypeCreateView(CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('types_view')
+        return reverse('webapp:types_view')
 
 
 class TypeUpdateView(LoginRequiredMixin, UpdateView):
@@ -36,7 +36,7 @@ class TypeUpdateView(LoginRequiredMixin, UpdateView):
     context_object_name = 'type'
 
     def get_success_url(self):
-        return reverse('types_view')
+        return reverse('webapp:types_view')
 
 
 class TypeDeleteView(LoginRequiredMixin, DeleteView):
@@ -54,7 +54,7 @@ class TypeDeleteView(LoginRequiredMixin, DeleteView):
         self.object = self.get_object()
         try:
             self.object.delete()
-            return redirect('statuses_view')
+            return redirect('webapp:types_view')
         except:
             return render(request, 'error_type.html')
 

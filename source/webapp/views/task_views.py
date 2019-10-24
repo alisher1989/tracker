@@ -9,7 +9,6 @@ from webapp.models import Task
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
-
 class IndexView(ListView):
     template_name = 'task/index.html'
     context_object_name = 'tasks'
@@ -17,7 +16,6 @@ class IndexView(ListView):
     ordering = ['-created_at']
     paginate_by = 4
     paginate_orphans = 1
-
 
     def get(self, request, *args, **kwargs):
         self.form = self.get_search_form()
@@ -64,7 +62,7 @@ class TaskCreateView(CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('task_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:task_view', kwargs={'pk': self.object.pk})
 
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
@@ -74,7 +72,7 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     context_object_name = 'task'
 
     def get_success_url(self):
-        return reverse('task_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:task_view', kwargs={'pk': self.object.pk})
 
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
