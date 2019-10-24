@@ -18,7 +18,7 @@ from django.urls import path
 from webapp.views import IndexView, TaskView, TaskCreateView, TaskUpdateView, \
     TaskDeleteView, StatusesView, StatusCreateView, StatusUpdateView, StatusDeleteView, TypesView, TypeCreateView, \
     TypeUpdateView, TypeDeleteView, ProjectsView, ProjectView, ProjectCreateView, ProjectUpdateView, ProjectDeleteView
-from accounts.views import login_view
+from accounts.views import login_view, logout_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -43,5 +43,6 @@ urlpatterns = [
 
 
     path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
 
 ]
