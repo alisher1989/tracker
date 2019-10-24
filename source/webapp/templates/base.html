@@ -20,9 +20,9 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
                 <li><a href="{% url 'index' %}">Home</a></li>
                 {% if request.user.is_authenticated %}
                     <li>Hello, {{ user }}!</li>
-                    <li><a href="{% url 'logout' %}">Log OUT</a></li>
+                    <li><a href="{% url 'accounts:logout' %}">Log OUT</a></li>
                 {% else %}
-                    <li><a href="{% url 'login' %}">Log IN</a></li>
+                    <li><a href="{% url 'accounts:login' %}">Log IN</a></li>
                 {% endif %}
                 {% block menu %}{% endblock %}
             </ul>

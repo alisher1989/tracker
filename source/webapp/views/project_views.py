@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
@@ -57,11 +58,17 @@ class ProjectCreateView(CreateView):
     template_name = 'project/create.html'
     form_class = ProjectForm
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
+
+
     def get_success_url(self):
         return reverse('project_view', kwargs={'pk': self.object.pk})
 
 
-class ProjectUpdateView(UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     model = Project
     template_name = 'project/update.html'
     form_class = ProjectForm
@@ -71,12 +78,16 @@ class ProjectUpdateView(UpdateView):
         return reverse('project_view', kwargs={'pk': self.object.pk})
 
 
-class ProjectDeleteView(DeleteView):
+class ProjectDeleteView(LoginRequiredMixin, DeleteView):
     model = Project
     pk_kwargs_url = 'pk'
     template_name = 'project/delete.html'
     context_object_name = 'project'
     success_url = reverse_lazy('projects_view')
+
+
+    # def dispatch(self, request, *args, **kwargs):
+    #     return super().dispatch(request, *args, **kwargs)
 
     # def get(self, request, *args, **kwargs):
     #     project = self.get_object()
