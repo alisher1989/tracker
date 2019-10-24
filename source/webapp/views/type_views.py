@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 
@@ -14,27 +15,21 @@ class TypesView(ListView):
     context_key = 'types'
 
 
-
 class TypeCreateView(CreateView):
     model = Type
     template_name = 'type/create_type.html'
     form_class = TypeForm
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse('types_view')
 
 
-
-
-# class TypeUpdateView(UpdateView):
-#     model = Type
-#     template_name = 'type/type_update.html'
-#     form_class = TypeForm
-#     context_object_name = 'type'
-#
-#     def get_redirect_url(self):
-#         return reverse('types_view')
-class TypeUpdateView(UpdateView):
+class TypeUpdateView(LoginRequiredMixin, UpdateView):
     model = Type
     template_name = 'type/type_update.html'
     form_class = TypeForm
@@ -44,16 +39,7 @@ class TypeUpdateView(UpdateView):
         return reverse('types_view')
 
 
-# class TypeDeleteView(DeleteView):
-#     model = Type
-#     template_name = 'type/type_delete.html'
-#     context_object_name = 'type'
-#     error_page = 'error_type.html'
-#
-#     def get_redirect_url(self):
-#         return reverse('types_view')
-
-class TypeDeleteView(DeleteView):
+class TypeDeleteView(LoginRequiredMixin, DeleteView):
     model = Type
     template_name = 'type/type_delete.html'
     context_object_name = 'type'

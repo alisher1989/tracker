@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from webapp.forms import StatusForm
@@ -18,19 +19,16 @@ class StatusCreateView(CreateView):
     template_name = 'status/create_status.html'
     form_class = StatusForm
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse('statuses_view')
 
 
-# class StatusUpdateView(UpdateView):
-#     model = Status
-#     template_name = 'status/status_update.html'
-#     form_class = StatusForm
-#     context_object_name = 'status'
-#
-#     def get_redirect_url(self):
-#         return reverse('statuses_view')
-class StatusUpdateView(UpdateView):
+class StatusUpdateView(LoginRequiredMixin, UpdateView):
     model = Status
     template_name = 'status/status_update.html'
     form_class = StatusForm
@@ -39,17 +37,8 @@ class StatusUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('statuses_view')
 
-# class StatusDeleteView(DeleteView):
-#     model = Status
-#     template_name = 'status/status_delete.html'
-#     context_object_name = 'status'
-#     error_page = 'error.html'
-#
-#     def get_redirect_url(self):
-#         return reverse('statuses_view')
 
-
-class StatusDeleteView(DeleteView):
+class StatusDeleteView(LoginRequiredMixin, DeleteView):
     model = Status
     template_name = 'status/status_delete.html'
     context_object_name = 'status'
