@@ -44,6 +44,7 @@ class IndexView(ListView):
             return self.form.cleaned_data['search']
         return None
 
+
 class TaskView(DetailView):
     template_name = 'task/task.html'
     context_object_name = 'task'
