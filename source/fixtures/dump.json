@@ -348,19 +348,6 @@
 },
 {
   "model": "webapp.task",
-  "pk": 36,
-  "fields": {
-    "summary": "ee",
-    "description": "eee",
-    "status": 3,
-    "type": 2,
-    "project": 25,
-    "created_at": "2019-10-15T08:33:44.962Z",
-    "updated_at": "2019-10-15T08:33:44.962Z"
-  }
-},
-{
-  "model": "webapp.task",
   "pk": 37,
   "fields": {
     "summary": "Taking photo",
@@ -433,7 +420,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$150000$NvZ1MmlTIXf3$xHMM4W5XHSMAPAsrURClHzTR1PxB/31DmhQfwt+9+Ak=",
-    "last_login": "2019-10-09T06:53:45.616Z",
+    "last_login": "2019-10-24T09:03:21.325Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",

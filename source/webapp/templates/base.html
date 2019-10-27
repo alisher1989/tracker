@@ -23,6 +23,7 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
                     <li><a href="{% url 'accounts:logout' %}">Log OUT</a></li>
                 {% else %}
                     <li><a href="{% url 'accounts:login' %}">Log IN</a></li>
+                    <li><a href="{% url 'accounts:register' %}">Sign UP</a></li>
                 {% endif %}
                 {% block menu %}{% endblock %}
             </ul>
