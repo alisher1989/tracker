@@ -1,12 +1,14 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.urls import reverse
 from main.settings import HOST_NAME
 from django.views.generic import UpdateView, DetailView
 
-from accounts.forms import SignUpForm
+from accounts.forms import SignUpForm, UserChangeForm
 from accounts.models import Token
 
 
@@ -79,6 +81,24 @@ class UserDetailView(DetailView):
     model = User
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
+
+
+class UserChangeView(LoginRequiredMixin, UpdateView):
+    model = User
+    template_name = 'user_update.html'
+    context_object_name = 'user_obj'
+    form_class = UserChangeForm
+
+    def dispatch(self, request, *args, **kwargs):
+        user = self.get_object()
+        if request.user == user:
+            return super().dispatch(request, *args, **kwargs)
+        return HttpResponseForbidden('403 Forbidden')
+
+    def get_success_url(self):
+        return reverse('accounts:user_detail', kwargs={'pk': self.object.pk})
+
+
 
 
 
