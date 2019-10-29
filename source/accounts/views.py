@@ -1,14 +1,14 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.urls import reverse
 from main.settings import HOST_NAME
 from django.views.generic import UpdateView, DetailView
 
-from accounts.forms import SignUpForm, UserChangeForm
+from accounts.forms import SignUpForm, UserChangeForm, UserChangePasswordForm
 from accounts.models import Token
 
 
@@ -94,6 +94,24 @@ class UserChangeView(UserPassesTestMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('accounts:user_detail', kwargs={'pk': self.object.pk})
+
+
+class UserChangePasswordView(UserPassesTestMixin, UpdateView):
+    model = User
+    template_name = 'user_change_password.html'
+    form_class = UserChangePasswordForm
+    context_object_name = 'user_obj'
+
+    def test_func(self):
+        return self.get_object() == self.request.user
+
+    # def form_valid(self, form):
+    #     user = form.save()
+    #     login(self.request, user)
+    #     return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('accounts:login')
 
 
 
