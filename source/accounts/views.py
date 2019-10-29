@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.urls import reverse
 from main.settings import HOST_NAME
+from django.views.generic import UpdateView, DetailView
 
 from accounts.forms import SignUpForm
 from accounts.models import Token
@@ -72,6 +73,14 @@ def user_activate_view(request, token):
     user.save()
     login(request, user)
     return redirect('webapp:index')
+
+
+class UserDetailView(DetailView):
+    model = User
+    template_name = 'user_detail.html'
+    context_object_name = 'user_obj'
+
+
 
 
 
