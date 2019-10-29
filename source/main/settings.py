@@ -124,6 +124,10 @@ STATIC_URL = '/static/'
 
 LOGIN_URL = 'accounts:login'
 
+LOGIN_REDIRECT_URL = 'webapp:index'
+
+LOGOUT_URL_REDIRECT_URL = 'webapp:index'
+
 HOST_NAME = 'localhost:8000'
 
 EMAIL_HOST = 'smtp.mailtrap.io'

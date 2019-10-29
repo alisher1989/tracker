@@ -1,12 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.contrib.auth.mixins import UserPassesTestMixin
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.urls import reverse
 from main.settings import HOST_NAME
-from django.views.generic import UpdateView, DetailView
+from django.views.generic import UpdateView, DetailView, ListView
 
 from accounts.forms import SignUpForm, UserChangeForm, UserChangePasswordForm
 from accounts.models import Token
@@ -26,7 +26,7 @@ def login_view(request):
             return redirect('webapp:index')
         else:
             context['has_error'] = True
-    return render(request, 'login.html', context=context)
+    return render(request, 'registration/login.html', context=context)
 
 
 @login_required
@@ -112,6 +112,14 @@ class UserChangePasswordView(UserPassesTestMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('accounts:login')
+
+
+class UsersListView(ListView):
+    template_name = 'registration/users.html'
+    context_object_name = 'users'
+    model = User
+    paginate_by = 4
+    paginate_orphans = 1
 
 
 

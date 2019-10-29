@@ -4,9 +4,6 @@
     <li><a href="{% url 'webapp:task_update' task.pk %}">Edit</a></li>
     <li><a href="{% url 'webapp:task_delete' task.pk %}">Delete</a></li>
     <li><a href="{% url 'webapp:task_add' %}">Add Task</a></li>
-    <li><a href="{% url 'webapp:projects_view' %}">Projects</a></li>
-    <li><a href="{% url 'webapp:statuses_view' %}">Statuses</a></li>
-    <li><a href="{% url 'webapp:types_view' %}">Types</a></li>
 {% endblock %}
 {% block content %}
     <h1>{{ task.summary }}</h1>
