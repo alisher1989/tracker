@@ -1,9 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
+from django.urls import reverse
+from main.settings import HOST_NAME
 
 from accounts.forms import SignUpForm
+from accounts.models import Token
 
 
 def login_view(request):
@@ -37,16 +40,38 @@ def register_view(request):
         form = SignUpForm(data=request.POST)
         if form.is_valid():
             user = User(
-                first_name=form.cleaned_data.get('first_name'),
-                last_name=form.cleaned_data.get('last_name'),
+                 username=form.cleaned_data.get('username'),
+                 first_name=form.cleaned_data.get('first_name'),
+                 last_name=form.cleaned_data.get('last_name'),
+                 email=form.cleaned_data.get('email'),
+                 is_active=False
             )
             user.set_password(form.cleaned_data.get('password'))
             user.save()
-            login(request, user)
+
+            token = Token.objects.create(user=user)
+
+            activation_url = HOST_NAME + reverse('accounts:user_activate', kwargs={'token': token})
+            try:
+                user.email_user(
+                    'Вы зарегистрировались на сайте localhost:8000.',
+                    'Для активации перейдите по ссылке: ' + activation_url
+                )
+            except ConnectionRefusedError:
+                print('Could not send email. Server error.')
+
             return redirect('webapp:index')
         else:
             return render(request, 'register.html', context={'form': form})
 
+
+def user_activate_view(request, token):
+    token = get_object_or_404(Token, token=token)
+    user = token.user
+    user.is_active = True
+    user.save()
+    login(request, user)
+    return redirect('webapp:index')
 
 
 
