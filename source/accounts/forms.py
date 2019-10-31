@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from accounts.models import Git
+
 
 
 class SignUpForm(forms.Form):
@@ -43,9 +45,11 @@ class SignUpForm(forms.Form):
 
 
 class UserChangeForm(forms.ModelForm):
+    git = forms.CharField(label='Git profile')
+
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['first_name', 'last_name', 'email', 'git']
 
 
 class UserChangePasswordForm(forms.ModelForm):
@@ -75,6 +79,6 @@ class UserChangePasswordForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['password', 'password_confirm', 'old_password']
+        fields = ['password', 'password_confirm']
 
 

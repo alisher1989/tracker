@@ -1,5 +1,6 @@
 from django.contrib import admin
 from webapp.models import Task, Type, Status, Project
+from accounts.models import Git
 
 
 class TodolistAdmin(admin.ModelAdmin):
@@ -16,3 +17,4 @@ admin.site.register(Task, TodolistAdmin)
 admin.site.register(Type)
 admin.site.register(Status)
 admin.site.register(Project)
+admin.site.register(Git)

@@ -9,3 +9,13 @@ class Token(models.Model):
 
     def __str__(self):
         return str(self.token)
+
+
+class Git(models.Model):
+    git = models.ForeignKey('auth.User', related_name='users_git', verbose_name='Git', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.git)
+
+
+
